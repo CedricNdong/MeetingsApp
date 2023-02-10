@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/meetings")
 public class MeetingsController {
     @Autowired
-    MeetingsService meetingsService;
+    private MeetingsService meetingsService;
 
     @PostMapping
     public String createMeeting(@RequestBody Meeting meeting) {
@@ -24,6 +24,16 @@ public class MeetingsController {
     public List<Meeting> getMeetings() {
         List<Meeting> meetings = meetingsService.getMeetings();
         return meetings;
+    }
+
+    @PutMapping("/{id}")
+    public Meeting updateMeeting(@PathVariable Integer id, @RequestBody Meeting meeting) {
+        return meetingsService.updateMeeting(id, meeting);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteMeeting(@PathVariable Integer id) {
+        meetingsService.deleteMeeting(id);
     }
 
 
