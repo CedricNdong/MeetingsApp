@@ -13,6 +13,7 @@ import java.util.List;
 @Service
 public class MeetingsService {
 
+
     private final MeetingsRepository meetingsRepository;
 
     public MeetingsService(MeetingsRepository meetingsRepository) {
@@ -26,6 +27,11 @@ public class MeetingsService {
     public List<Meeting> getMeetings() {
         return meetingsRepository.findAll();
     }
+
+    public Meeting getMeetingById(Integer id) {
+        return meetingsRepository.findById(id).orElse(null);
+    }
+
 
     public Meeting updateMeeting(Integer id,Meeting meeting) {
         Meeting existingMeeting = meetingsRepository.findById(id).orElse(null);

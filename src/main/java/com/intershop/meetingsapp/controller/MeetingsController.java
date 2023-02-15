@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:35169")
 @RestController
 @RequestMapping("/meetings")
 public class MeetingsController {
@@ -24,6 +25,11 @@ public class MeetingsController {
     public List<Meeting> getMeetings() {
         List<Meeting> meetings = meetingsService.getMeetings();
         return meetings;
+    }
+
+    @GetMapping("/{id}")
+    public Meeting getMeetingById(@PathVariable Integer id) {
+        return meetingsService.getMeetingById(id);
     }
 
     @PutMapping("/{id}")
