@@ -1,0 +1,27 @@
+version: '3.7'
+services:
+  postgres_db:
+    container_name: 'postgres_db'
+    image: postgres:14.2-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=cedric
+      - POSTGRES_PASSWORD=Gomo.2025
+      - POSTGRES_DB=db_meetingsapp_intershop
+    ports:
+    - "5434:5434"
+
+  meetingsapp:
+    container_name: 'meetingsapp'
+    build: .
+    ports:
+    - "8084:8084"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_db:5434/db_meetingsapp_intershop
+      - SPRING_DATASOURCE_USERNAME=cedric
+      - SPRING_DATASOURCE_PASSWORD=Gomo.2025
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=true
+      - SPRING_JPA_PROPERTIES_HIBERNATE_USE_SQL_COMMENTS=true
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+

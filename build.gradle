@@ -29,10 +29,22 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
+    testImplementation 'org.testcontainers:postgresql:1.16.0'
+    testImplementation 'org.testcontainers:testcontainers:1.16.0'
+    testImplementation 'org.testcontainers:junit-jupiter:1.16.0'
 
 }
+jar {
+    enabled = true
+    archiveBaseName = 'meetings-app'
+    archiveVersion = '0.0.1-SNAPSHOT'
 
-tasks.named('test') {
+}
+bootJar {
+    duplicatesStrategy = 'exclude'
+}
+
+
+    tasks.named('test') {
     useJUnitPlatform()
 }

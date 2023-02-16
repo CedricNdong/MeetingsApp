@@ -29,12 +29,12 @@ public class MeetingsService {
     }
 
     public Meeting getMeetingById(Integer id) {
-        return meetingsRepository.findById(id).orElse(null);
+        return meetingsRepository.findById(id).orElseThrow(() -> new RuntimeException("Meeting not found"));
     }
 
 
     public Meeting updateMeeting(Integer id,Meeting meeting) {
-        Meeting existingMeeting = meetingsRepository.findById(id).orElse(null);
+        Meeting existingMeeting = meetingsRepository.findById(id).orElseThrow(() -> new RuntimeException("Meeting not found"));
         existingMeeting.setRoom(meeting.getRoom());
         existingMeeting.setDate(meeting.getDate());
         existingMeeting.setStudents(meeting.getStudents());

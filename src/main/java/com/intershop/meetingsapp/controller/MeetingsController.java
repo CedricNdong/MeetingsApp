@@ -3,7 +3,6 @@ package com.intershop.meetingsapp.controller;
 
 import com.intershop.meetingsapp.model.Meeting;
 import com.intershop.meetingsapp.service.MeetingsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,8 +11,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/meetings")
 public class MeetingsController {
-    @Autowired
-    private MeetingsService meetingsService;
+
+    private final MeetingsService meetingsService;
+
+    public MeetingsController(MeetingsService meetingsService) {
+        this.meetingsService = meetingsService;
+    }
 
     @PostMapping
     public String createMeeting(@RequestBody Meeting meeting) {
@@ -23,8 +26,7 @@ public class MeetingsController {
 
     @GetMapping
     public List<Meeting> getMeetings() {
-        List<Meeting> meetings = meetingsService.getMeetings();
-        return meetings;
+        return meetingsService.getMeetings();
     }
 
     @GetMapping("/{id}")
